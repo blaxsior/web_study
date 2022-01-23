@@ -1,0 +1,76 @@
+import { readFile, writeFile } from 'fs/promises';
+import { randomBytes } from 'crypto';
+import { join } from 'path';
+import { Cart } from './cart.model.js';
+import { IProduct } from '../Interface/IProduct.interface.js';
+
+
+
+let products: IProduct[] = [];
+const p = join('data', 'products.json');
+
+export class Product implements Required<IProduct> {
+    id: string;
+    title: string;
+    imageUrl: string;
+    price: number;
+    description: string;
+
+    constructor(info: IProduct) {
+        this.id = randomBytes(20).toString('hex');
+        this.title = info.title ?? "";
+        this.imageUrl = info.imageUrl ?? "";
+        this.price = info.price ?? 0.0;
+        this.description = info.description ?? "";
+    }
+
+
+    private static async getProductFromFile() {
+        try {
+            const fileContent = await readFile(p);
+            products = JSON.parse(fileContent.toString('utf8'));
+        }
+        catch (e) {
+            products = [];
+        }
+    }
+
+    async save() {
+        console.log('save');
+        await Product.getProductFromFile();
+        products.push(this);
+
+        try {
+            await writeFile(p, JSON.stringify(products));
+        }
+        catch {
+            console.log('cannot save products');
+        }
+    }
+
+    static async deleteById(id: string) {
+        await Product.getProductFromFile();
+
+        const product = products.find(prod => prod.id === id);
+        if (product) {
+            const updatedProducts = products.filter(prod => prod.id !== id);
+
+            try {
+                await writeFile(p, JSON.stringify(updatedProducts));
+                Cart.deleteProduct(id, product.price!);
+            }
+            catch (err) { }
+        }
+
+    }
+    static async fetchAll(): Promise<Readonly<IProduct[]>> {
+        await Product.getProductFromFile();
+        return products;
+    }
+
+    static async findById(id: string): Promise<Readonly<IProduct>> {
+        await Product.getProductFromFile();
+        const product = products.filter(elem => elem.id === id)?.[0];
+        return product;
+    }
+}
