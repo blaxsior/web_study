@@ -72,7 +72,7 @@ export const postCart: RequestHandler = async (req, res, next) => {
 
     if (products.length > 0) {
       product = products[0];
-      newQuantity += product.CartItem.quantity;
+      newQuantity += product.cartitem.quantity;
     } // 존재하면
     else {
       product = await Product.findByPk(prodId);
@@ -131,7 +131,7 @@ export const postOrder: RequestHandler = async (req, res, next) => {
   const order = await req.user.createOrder();
   try {
     await order.addProducts(products.map(product => {
-      product.OrderItem = { quantity: product.CartItem.quantity };
+      product.orderitem = { quantity: product.cartitem.quantity };
       return product;
     }));
     await cart.setProducts(null);

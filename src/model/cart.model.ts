@@ -41,7 +41,7 @@ export class Cart extends ICartInstance implements ICart {
     declare removeProduct: BelongsToManyRemoveAssociationMixin<Product, IProductPrimaryKey>
     declare removeProducts: BelongsToManyRemoveAssociationsMixin<Product, IProductPrimaryKey>
     declare createProduct: BelongsToManyCreateAssociationMixin<Product>;
-    declare CartItem: CartItem | ICartItemInput; // 단순 객체로 사용해야 되는 경우가 존재함...
+    declare cartitem: CartItem | ICartItemInput; // 단순 객체로 사용해야 되는 경우가 존재함...
 }
 
 Cart.init({
@@ -52,5 +52,5 @@ Cart.init({
     }
 }, {
     sequelize: db,
-    tableName: 'cart'
+    modelName: 'cart'
 });

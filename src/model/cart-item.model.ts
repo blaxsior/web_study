@@ -18,5 +18,5 @@ CartItem.init({
     }
 }, {
     sequelize: db,
-    tableName: 'cartitem'
+    modelName: 'cartitem'
 });

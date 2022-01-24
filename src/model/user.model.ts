@@ -17,7 +17,6 @@ import {
 import { sequelize as db } from '../util/database.js';
 import { IUser, IUserInstance } from "../Interface/IUser.interface.js";
 import { IProductPrimaryKey } from '../Interface/IProduct.interface.js';
-import { ICartInstance, ICartPrimaryKey } from '../Interface/ICart.interface.js';
 import { Product } from './product.model.js';
 import { Cart } from './cart.model.js';
 import { Order } from './order.model.js';
@@ -28,7 +27,6 @@ export class User extends IUserInstance  implements IUser {
     declare name: string;
     declare email: string;
 
-    
     /*with Product*/
     declare getProducts: HasManyGetAssociationsMixin<Product>;
     declare countProducts: HasManyCountAssociationsMixin;
@@ -64,7 +62,7 @@ User.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
     },
     name: {
         type: DataTypes.STRING,
@@ -77,8 +75,8 @@ User.init({
 },
     {
         sequelize: db,
-        tableName: 'user'
-    }
+        modelName: 'user',
+    },
 );
 
 // export const User = db.define<IUserInstance>('user', {

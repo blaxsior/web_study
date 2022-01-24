@@ -51,7 +51,7 @@ export class Product extends IProductInstance implements IProduct {
     declare removeCart: BelongsToManyRemoveAssociationMixin<Cart, ICartPrimaryKey>
     declare removeCarts: BelongsToManyRemoveAssociationsMixin<Cart, ICartPrimaryKey>
     declare createCart: BelongsToManyCreateAssociationMixin<Cart>;
-    declare CartItem: CartItem|ICartItemInput;
+    declare cartitem: CartItem|ICartItemInput;
 
     /*with Order*/
     declare getOrders: BelongsToManyGetAssociationsMixin<Order>;
@@ -64,7 +64,7 @@ export class Product extends IProductInstance implements IProduct {
     declare removeOrder: BelongsToManyRemoveAssociationMixin<Order, IOrderPrimaryKey>
     declare removeOrders: BelongsToManyRemoveAssociationsMixin<Order, IOrderPrimaryKey>
     declare createOrder: BelongsToManyCreateAssociationMixin<Order>;
-    declare OrderItem: OrderItem|IOrderItemInput;
+    declare orderitem: OrderItem|IOrderItemInput;
 }
 
 Product.init({
@@ -91,7 +91,7 @@ Product.init({
 },
     {
         sequelize: db,
-        tableName: 'product'
+        modelName: 'product'
     }
 );
 

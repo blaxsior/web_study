@@ -20,5 +20,5 @@ OrderItem.init({
     }
 }, {
     sequelize: db,
-    tableName: 'orderitem'
+    modelName: 'orderitem'
 });

@@ -37,7 +37,7 @@ export class Order extends IOrderInstance implements IOrder {
     declare removeProduct: BelongsToManyRemoveAssociationMixin<Product, IProductPrimaryKey>
     declare removeProducts: BelongsToManyRemoveAssociationsMixin<Product, IProductPrimaryKey>
     declare createProduct: BelongsToManyCreateAssociationMixin<Product>;
-    declare OrderItem: OrderItem|IOrderItemInput;
+    declare orderitem: OrderItem|IOrderItemInput;
 
     /*with User*/
     declare getUser?: BelongsToGetAssociationMixin<User>;
@@ -54,5 +54,5 @@ Order.init({
     }
 }, {
     sequelize: db,
-    tableName: 'order'
+    modelName: 'order'
 });
