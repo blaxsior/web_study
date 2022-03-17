@@ -19,15 +19,13 @@ export const postAddProduct: RequestHandler = async (req, res, next) => {
     //     imageUrl: req.body.imageUrl,
     //     description: req.body.description,
     // });
-    console.log(req.user.createProduct);
-    console.log(req.user.hasProduct);
-    console.log(req.user.hasProducts);
     await req.user.createProduct({
         title: req.body.title,
         price: req.body.price,
         imageUrl: req.body.imageUrl,
         description: req.body.description,
-    })
+    });
+    
     res.redirect('/admin/products');
 };
 

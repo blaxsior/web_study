@@ -17,17 +17,17 @@ export const make_association = () => {
 
     //User : Cart => one to one
     User.hasOne(Cart);
-    Cart.belongsTo(User, {constraints: true});
+    Cart.belongsTo(User, { constraints: true });
 
     //User : Order => one to many
     User.hasMany(Order);
     Order.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 
     //Cart : Product => many to many, through CartItem
-    Cart.belongsToMany(Product, {through : CartItem});
-    Product.belongsToMany(Cart, {through : CartItem});
+    Cart.belongsToMany(Product, { through: CartItem });
+    Product.belongsToMany(Cart, { through: CartItem });
 
     //Order : Product => many to many, through OrderItem
-    Order.belongsToMany(Product, {through: OrderItem, });
-    Product.belongsToMany(Order, {through: OrderItem});
+    Order.belongsToMany(Product, { through: OrderItem });
+    Product.belongsToMany(Order, { through: OrderItem });
 }

@@ -26,6 +26,7 @@ import { User } from './user.model.js';
 export class Cart extends ICartInstance implements ICart {
     declare id: string;
 
+    /*with User*/
     declare getUser: BelongsToGetAssociationMixin<User>;
     declare setUser: BelongsToSetAssociationMixin<User, IUserPrimaryKey>;
     declare createUser: BelongsToCreateAssociationMixin<User>;
